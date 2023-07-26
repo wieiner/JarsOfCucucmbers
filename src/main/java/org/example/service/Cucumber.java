@@ -1,6 +1,8 @@
 package org.example.service;
 
 public class Cucumber {
+    private double volume;
+
     public Cucumber(double volume) {
         this.volume = volume;
     }
@@ -12,8 +14,6 @@ public class Cucumber {
     public double getVolume() {
         return volume;
     }
-
-    private double volume;
 
     public Cucumber divideCucumber(double newCurrentVolumeCuttedFromOriginal)
     {

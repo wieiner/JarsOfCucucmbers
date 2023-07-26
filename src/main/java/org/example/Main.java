@@ -19,14 +19,18 @@ class SingletonService {
 public class Main {
     public static void main(String[] args) {
 
+        int numOfCucumbers = 1;
+
         // Instantiating SingletonService class with variable singletonService
         SingletonService singletonService = SingletonService.getInstance();
 
 
         List<Cucumber> cucumberList = singletonService.cucumbersToJarsImperativeStyle
-                        .generateCucumberList(10);
+                        .generateCucumberList(numOfCucumbers);
 
         List<Jar> jarList = singletonService.cucumbersToJarsImperativeStyle.toJar(cucumberList);
+
+        System.out.println("на входе " +numOfCucumbers+ " стандартных огурцов, обьемом "+ singletonService.cucumbersToJarsImperativeStyle.standardCucumberVolume+" приступаем к созданию банок");
 
         for ( Jar j : jarList) {
             System.out.println("Создана банка объемом: "
@@ -34,6 +38,20 @@ public class Main {
                     + " из "
                     + j.cucumberList.size()
                     + " огурцов ");
+
+            int i=0;
+            double v=0.0;
+            for ( Cucumber c : j.getCucumberList()) {
+                i++; v+= c.getVolume();
+                System.out.println(" огурец: "
+                        + i
+                        + " обьемом "
+                        + c.getVolume()
+                        + " итого обьем  " + v);
+
+            }
+            System.out.println(" итого тотальный обьем по огурцам: " + v + " а обьем банки " + j.getVolume() );
+            System.out.println("");
         }
 
     }

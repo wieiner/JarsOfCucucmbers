@@ -7,11 +7,21 @@ import java.util.List;
 
 @Setter
 public class Jar {
+    public double volume;
+    public List<Cucumber> cucumberList;
+
+    public Jar(double volume, List<Cucumber> cucumberList) {
+        this.volume = volume;
+        this.cucumberList = cucumberList;
+    }
+
+    public double getVolume() {
+        return volume;
+    }
+
     public void setVolume(double volume) {
         this.volume = volume;
     }
-
-    public double volume;
 
     public List<Cucumber> getCucumberList() {
         return cucumberList;
@@ -21,14 +31,4 @@ public class Jar {
         this.cucumberList = cucumberList;
     }
 
-    public List<Cucumber> cucumberList;
-
-    public double getVolume() {
-        return volume;
-    }
-
-    public Jar(double volume, List<Cucumber> cucumberList) {
-        this.volume = volume;
-        this.cucumberList = cucumberList;
-    }
 }
