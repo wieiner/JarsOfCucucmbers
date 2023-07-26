@@ -1,15 +1,16 @@
 package org.example.service;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-
-@AllArgsConstructor
-@Getter
-@Setter
 public class Cucumber {
+    public Cucumber(double volume) {
+        this.volume = volume;
+    }
+
     public void setVolume(double volume) {
         this.volume = volume;
+    }
+
+    public double getVolume() {
+        return volume;
     }
 
     private double volume;
