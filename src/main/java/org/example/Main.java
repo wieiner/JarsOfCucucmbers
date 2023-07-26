@@ -27,17 +27,19 @@ public class Main {
         // Instantiating SingletonService class with variable singletonService
         SingletonService singletonService = SingletonService.getInstance();
 
-        List<Cucumber> cucumberList = singletonService.cucumbersToJarsImperativeStyle
-                        .generateCucumberList(numOfCucumbers);
-        List<Jar> jarList = singletonService.cucumbersToJarsImperativeStyle.toJar(cucumberList);
 
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(System.in));
-        System.out.print("введите количество огурцов " );
+        System.out.print("Enter number of cucumbers " );
         String s = reader.readLine();
         numOfCucumbers = Integer.parseInt(s);
 
-        System.out.println("на входе " +numOfCucumbers+ " стандартных огурцов, обьемом "+ singletonService.cucumbersToJarsImperativeStyle.standardCucumberVolume+" приступаем к созданию банок");
+        List<Cucumber> cucumberList = singletonService.cucumbersToJarsImperativeStyle
+                .generateCucumberList(numOfCucumbers);
+
+        List<Jar> jarList = singletonService.cucumbersToJarsImperativeStyle.toJar(cucumberList);
+
+        System.out.println("na whode " +numOfCucumbers+ " standartnych ogurzow objemom "+ singletonService.cucumbersToJarsImperativeStyle.standardCucumberVolume+" prystupaem k sozdaniju banok");
 
         for ( Jar j : jarList) {
             System.out.println("Создана банка объемом: "
