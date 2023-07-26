@@ -19,7 +19,7 @@ class SingletonService {
 public class Main {
     public static void main(String[] args) {
 
-        int numOfCucumbers = 1;
+        int numOfCucumbers = 15;
 
         // Instantiating SingletonService class with variable singletonService
         SingletonService singletonService = SingletonService.getInstance();

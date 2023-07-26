@@ -12,8 +12,8 @@ import java.util.List;
 @Getter
 @Setter
 public class CucumbersToJarsImperativeStyle {
-    public final double standardJarVolume = 3.0;
-    public final double standardCucumberVolume = 2.0;
+    public final double standardJarVolume = 3.5;
+    public final double standardCucumberVolume = 0.6;
     public List<Cucumber> generateCucumberList(int cucumberCount) {
 
         List<Cucumber> lc = new ArrayList<Cucumber>();
