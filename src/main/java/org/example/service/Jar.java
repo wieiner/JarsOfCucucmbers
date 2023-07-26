@@ -31,4 +31,14 @@ public class Jar {
         this.cucumberList = cucumberList;
     }
 
+    public double calculateTotalCucumbersVolume()
+    {
+        return cucumberList.stream().map(Cucumber::getVolume) .reduce(0.0,Double::sum);
+    }
+    public double getFreeVolume()
+    {
+        return volume - calculateTotalCucumbersVolume();
+    }
+
+
 }

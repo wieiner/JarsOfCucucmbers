@@ -4,6 +4,9 @@ import org.example.service.Cucumber;
 import org.example.service.CucumbersToJarsImperativeStyle;
 import org.example.service.Jar;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 
 class SingletonService {
@@ -17,18 +20,22 @@ class SingletonService {
 }
 
 public class Main {
-    public static void main(String[] args) {
 
-        int numOfCucumbers = 15;
+    public static void main(String[] args) throws IOException {
 
+        int numOfCucumbers = 3;
         // Instantiating SingletonService class with variable singletonService
         SingletonService singletonService = SingletonService.getInstance();
 
-
         List<Cucumber> cucumberList = singletonService.cucumbersToJarsImperativeStyle
                         .generateCucumberList(numOfCucumbers);
-
         List<Jar> jarList = singletonService.cucumbersToJarsImperativeStyle.toJar(cucumberList);
+
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(System.in));
+        System.out.print("введите количество огурцов " );
+        String s = reader.readLine();
+        numOfCucumbers = Integer.parseInt(s);
 
         System.out.println("на входе " +numOfCucumbers+ " стандартных огурцов, обьемом "+ singletonService.cucumbersToJarsImperativeStyle.standardCucumberVolume+" приступаем к созданию банок");
 
