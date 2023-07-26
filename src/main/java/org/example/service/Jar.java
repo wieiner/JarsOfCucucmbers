@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 public class Jar {
-    private double volume;
-    private List<Cucumber> cucumberList;
+    public double volume;
+    public List<Cucumber> cucumberList;
 
 }

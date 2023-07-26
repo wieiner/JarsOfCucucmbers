@@ -1,10 +1,14 @@
 package org.example;
 
-import reactor.core.publisher.Flux;
+import org.example.service.Cucumber;
+import org.example.service.CucumbersToJarsImperativeStyle;
+import org.example.service.Jar;
+
+import java.util.List;
 
 class SingletonService {
 
-    public final JarsCucumbersCalculator cucumber = new JarsCucumbersCalculator();
+    public final CucumbersToJarsImperativeStyle cucumbersToJarsImperativeStyle = new CucumbersToJarsImperativeStyle();
     private final static SingletonService single_instance = new SingletonService();
 
     static SingletonService getInstance() {
@@ -12,21 +16,25 @@ class SingletonService {
     }
 }
 
-    public class Main {
-        public static void main(String[] args) {
+public class Main {
+    public static void main(String[] args) {
 
-            // Instantiating SingletonService class with variable singletonService
-            SingletonService singletonService = SingletonService.getInstance();
-
-
-            Flux<Double> cucumberFlux = singletonService.cucumber.generateCucumberFlux(10);
-            Flux<Double> jarFlux = singletonService.cucumber.toJarFluxAdvanced(cucumberFlux);
-
-            jarFlux.subscribe(jarVolume ->
-                    System.out.println("Создана банка объемом: " + jarVolume)
-            );
+        // Instantiating SingletonService class with variable singletonService
+        SingletonService singletonService = SingletonService.getInstance();
 
 
-            System.out.println("Hello world!");
+        List<Cucumber> cucumberList = singletonService.cucumbersToJarsImperativeStyle
+                        .generateCucumberList(10);
+
+        List<Jar> jarList = singletonService.cucumbersToJarsImperativeStyle.toJar(cucumberList);
+
+        for ( Jar j : jarList) {
+            System.out.println("Создана банка объемом: "
+                    + j.volume
+                    + " из "
+                    + j.cucumberList.size()
+                    + " огурцов ");
         }
+
     }
+}
