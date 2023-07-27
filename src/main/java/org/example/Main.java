@@ -20,7 +20,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int numOfCucumbers = 3;
+        int numOfCucumbers = 10;
         SingletonService singletonService = SingletonService.getInstance();
 
         List<Cucumber> cucumberList = singletonService.cucumbersToJarsImperativeStyle
