@@ -23,6 +23,9 @@ public class Main {
         int numOfCucumbers = 2;
         SingletonService singletonService = SingletonService.getInstance();
 
+        singletonService.cucumbersToJarsImperativeStyle.standardJarVolume = 3.0;
+        singletonService.cucumbersToJarsImperativeStyle.standardCucumberVolume = 5.25;
+
         List<Cucumber> cucumberList = singletonService.cucumbersToJarsImperativeStyle
                 .generateCucumberList(numOfCucumbers);
 
