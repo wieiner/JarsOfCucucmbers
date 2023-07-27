@@ -19,16 +19,8 @@ public class Jar {
         return volume;
     }
 
-    public void setVolume(double volume) {
-        this.volume = volume;
-    }
-
     public List<Cucumber> getCucumberList() {
         return cucumberList;
-    }
-
-    public void setCucumberList(List<Cucumber> cucumberList) {
-        this.cucumberList = cucumberList;
     }
 
     public double calculateTotalCucumbersVolume()
