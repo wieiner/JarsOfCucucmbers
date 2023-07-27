@@ -4,7 +4,6 @@ import org.example.service.Cucumber;
 import org.example.service.CucumbersToJarsImperativeStyle;
 import org.example.service.Jar;
 
-import java.io.IOException;
 import java.util.List;
 
 class SingletonService {
@@ -19,7 +18,7 @@ class SingletonService {
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         int numOfCucumbers = 3;
         SingletonService singletonService = SingletonService.getInstance();
