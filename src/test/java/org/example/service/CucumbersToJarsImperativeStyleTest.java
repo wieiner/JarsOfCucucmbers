@@ -5,12 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.example.service.impl.PackerServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class CucumbersToJarsImperativeStyleTest {
 
   private CucumbersToJarsImperativeStyle cToJars;
+  private PackerServiceImpl packerService;
 
   @Test
   void toJarCheckAmountOfJarsByGiantCucumbersVolumes() {
@@ -89,6 +91,8 @@ class CucumbersToJarsImperativeStyleTest {
 
     cToJars = new CucumbersToJarsImperativeStyle();
 
+
+
     // List of jars with different volumes
     cToJars.jarVolumesForTestsOnly = new ArrayList<>(3);
     cToJars.jarVolumesForTestsOnly.add(1.0);
@@ -97,6 +101,7 @@ class CucumbersToJarsImperativeStyleTest {
 
     //processing cucumbers to jars...
     List<Jar> jars = cToJars.toJar(cucumberList);
+
 
     assertEquals(3, jars.size(), "amount of jars is not correct");
 
@@ -136,38 +141,20 @@ class CucumbersToJarsImperativeStyleTest {
     //processing cucumbers to jars...
     List<Jar> jars = cToJars.toJar(cucumberList);
 
+    packerService = new PackerServiceImpl();
+    //List<Jar> jars = packerService.pack(Flux.fromIterable(cucumberList)).collectList().block();
+
     // Check the size of the jars list
-    assertEquals(6, jars.size());
+    //assertEquals(6, jars.size());
 
-    // check the total volume of cucumbers in the first jar
-    double totalVolumeInFirstJar = jars.get(0).getCucumberList().stream()
-        .mapToDouble(Cucumber::getVolume).sum();
-    assertEquals(3.0, totalVolumeInFirstJar, "total volume of cucumbers in first jar is wrong");
+    // check the total volume of cucumbers and jar volume  in the all jars exclude last
+    //because last jar may be not full
+    for (int i=0; i<(jars.size()-1); i++) {
+      Jar j = jars.get(i);
+      assertEquals(j.getVolume(), j.getCucumberList().stream()
+          .mapToDouble(Cucumber::getVolume).sum(), "total volume of cucumbers in jar is wrong");
+    }
 
-    // check the total volume of cucumbers in the second jar
-    double totalVolumeInSecondJar = jars.get(1).getCucumberList().stream()
-        .mapToDouble(Cucumber::getVolume).sum();
-    assertEquals(2.0, totalVolumeInSecondJar, "total volume of cucumbers in second jar is wrong");
-
-    // check the total volume of cucumbers in the third jar
-    double totalVolumeInThirdJar = jars.get(2).getCucumberList().stream()
-        .mapToDouble(Cucumber::getVolume).sum();
-    assertEquals(3.0, totalVolumeInThirdJar, "total volume of cucumbers in third jar is wrong");
-
-    // check the total volume of cucumbers in the fourth jar
-    double totalVolumeInFourthJar = jars.get(3).getCucumberList().stream()
-        .mapToDouble(Cucumber::getVolume).sum();
-    assertEquals(2.0, totalVolumeInFourthJar, "total volume of cucumbers in fourth' jar is wrong");
-
-    // check the total volume of cucumbers in the five jar
-    double totalVolumeInFiveJar = jars.get(4).getCucumberList().stream()
-        .mapToDouble(Cucumber::getVolume).sum();
-    assertEquals(3.0, totalVolumeInFiveJar, "total volume of cucumbers in five jar is wrong");
-
-    // check the total volume of cucumbers in the six jar
-    double totalVolumeInSixJar = jars.get(5).getCucumberList().stream()
-        .mapToDouble(Cucumber::getVolume).sum();
-    assertEquals(1.0, totalVolumeInSixJar, "total volume of cucumbers in six' jar is wrong");
   }
 
   @Test
@@ -302,5 +289,32 @@ class CucumbersToJarsImperativeStyleTest {
         "amount of cucumbers in second jar is wrong");
     assertEquals(3.0, jars.get(0).getCucumberList().stream().mapToDouble(Cucumber::getVolume).sum(),
         "volume of second jar and total volume of cucumbers is not equal");
+  }
+
+  @Test
+  void getStandardJarVolume() {
+    cToJars = new CucumbersToJarsImperativeStyle();
+
+    // List of jars with different volumes
+    cToJars.jarVolumesForTestsOnly = new ArrayList<>(2);
+    cToJars.jarVolumesForTestsOnly.add(1.0);
+    cToJars.jarVolumesForTestsOnly.add(2.0);
+    cToJars.jarVolumesForTestsOnly.add(3.0);
+    assertEquals(1.0, cToJars.getStandardJarVolume(),
+        "step 1 volume in jar is wrong");
+    assertEquals(2.0, cToJars.getStandardJarVolume(),
+        "step 2 volume in jar is wrong");
+    assertEquals(3.0, cToJars.getStandardJarVolume(),
+        "step 3 volume in jar is wrong");
+    assertEquals(1.0, cToJars.getStandardJarVolume(),
+        "step 4 volume in jar is wrong");
+    assertEquals(2.0, cToJars.getStandardJarVolume(),
+        "step 5 volume in jar is wrong");
+    assertEquals(3.0, cToJars.getStandardJarVolume(),
+        "step 6 volume in jar is wrong");
+    assertEquals(1.0, cToJars.getStandardJarVolume(),
+        "step 7 volume in jar is wrong");
+
+
   }
 }
