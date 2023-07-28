@@ -31,6 +31,37 @@ public class CucumbersToJarsImperativeStyle {
     return cucumberList;
   }
 
+  public List<Jar> toJarNew(List<Cucumber> listOfCucumber) {
+    List<Jar> jarList = new ArrayList<>();
+    jarList.add(new Jar(getStandardJarVolume(), new ArrayList<>()));
+
+    for (int i = 0; i < listOfCucumber.size(); i++) {
+
+      double freeVolumeInJar = jarList.get(jarList.size() - 1).getFreeVolume();
+      double cucumberRemainderWhenWePutItInJar =
+          listOfCucumber.get(i).getVolume() - freeVolumeInJar;
+
+      while (cucumberRemainderWhenWePutItInJar > 0.0) {
+        jarList.get(jarList.size() - 1).getCucumberList().add(new Cucumber(freeVolumeInJar));
+        jarList.add(new Jar(getStandardJarVolume(), new ArrayList<>()));
+
+        freeVolumeInJar = jarList.get(jarList.size() - 1).getFreeVolume();
+        cucumberRemainderWhenWePutItInJar = listOfCucumber.get(i).getVolume() - freeVolumeInJar;
+      }
+
+      if (cucumberRemainderWhenWePutItInJar < 0.0) {
+        jarList.get(jarList.size() - 1).getCucumberList()
+            .add(new Cucumber(listOfCucumber.get(i).getVolume()));
+      } else {
+        if (i != (listOfCucumber.size() - 1)) {
+          jarList.add(new Jar(getStandardJarVolume(), new ArrayList<>()));
+        }
+      }
+
+    }
+    return jarList;
+  }
+
   public List<Jar> toJar(List<Cucumber> listOfCucumber) {
     List<Jar> jarList = new ArrayList<>();
     jarList.add(new Jar(getStandardJarVolume(), new ArrayList<>()));

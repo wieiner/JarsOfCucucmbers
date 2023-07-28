@@ -29,7 +29,7 @@ public class Main {
     List<Cucumber> cucumberList = singletonService.cucumbersToJarsImperativeStyle
         .generateCucumberList(numOfCucumbers);
 
-    List<Jar> jarList = singletonService.cucumbersToJarsImperativeStyle.toJar(cucumberList);
+    List<Jar> jarList = singletonService.cucumbersToJarsImperativeStyle.toJarNew(cucumberList);
 
     System.out.println("на входе " + numOfCucumbers + " огурцов, обьемом "
         + singletonService.cucumbersToJarsImperativeStyle.standardCucumberVolume
