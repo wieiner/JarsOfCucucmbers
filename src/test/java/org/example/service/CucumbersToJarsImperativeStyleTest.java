@@ -141,11 +141,11 @@ class CucumbersToJarsImperativeStyleTest {
     //processing cucumbers to jars...
     List<Jar> jars = cToJars.toJar(cucumberList);
 
-    packerService = new PackerServiceImpl();
+    //packerService = new PackerServiceImpl();
     //List<Jar> jars = packerService.pack(Flux.fromIterable(cucumberList)).collectList().block();
 
     // Check the size of the jars list
-    //assertEquals(6, jars.size());
+    assertEquals(6, jars.size());
 
     // check the total volume of cucumbers and jar volume  in the all jars exclude last
     //because last jar may be not full
