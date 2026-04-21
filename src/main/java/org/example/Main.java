@@ -20,6 +20,21 @@ public class Main {
 
   public static void main(String[] args) {
 
+    // Красивый баннер при запуске
+    System.out.println("╔═══════════════════════════════════════════════════════════╗");
+    System.out.println("║                                                           ║");
+    System.out.println("║   ██████╗ ██╗   ██╗██╗     ██╗███╗   ██╗███████╗           ║");
+    System.out.println("║   ██╔══██╗██║   ██║██║     ██║████╗  ██║██╔════╝           ║");
+    System.out.println("║   ██████╔╝██║   ██║██║     ██║██╔██╗ ██║█████╗             ║");
+    System.out.println("║   ██╔══██╗██║   ██║██║     ██║██║╚██╗██║██╔══╝             ║");
+    System.out.println("║   ██║  ██║╚██████╔╝███████╗██║██║ ╚████║███████╗           ║");
+    System.out.println("║   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝           ║");
+    System.out.println("║                                                           ║");
+    System.out.println("║          🥒 Cucumber Packing Service 🫙                    ║");
+    System.out.println("║                                                           ║");
+    System.out.println("╚═══════════════════════════════════════════════════════════╝");
+    System.out.println();
+
     int numOfCucumbers = 2;
     SingletonService singletonService = SingletonService.getInstance();
 
