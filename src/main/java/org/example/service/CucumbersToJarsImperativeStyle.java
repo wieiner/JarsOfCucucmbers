@@ -33,31 +33,38 @@ public class CucumbersToJarsImperativeStyle {
 
   public List<Jar> toJarNew(List<Cucumber> listOfCucumber) {
     List<Jar> jarList = new ArrayList<>();
+    
+    if (listOfCucumber == null || listOfCucumber.isEmpty()) {
+      return jarList;
+    }
+    
     jarList.add(new Jar(getStandardJarVolume(), new ArrayList<>()));
 
     for (int i = 0; i < listOfCucumber.size(); i++) {
+      Cucumber currentCucumber = listOfCucumber.get(i);
+      double remainingCucumberVolume = currentCucumber.getVolume();
 
-      double freeVolumeInJar = jarList.get(jarList.size() - 1).getFreeVolume();
-      double cucumberRemainderWhenWePutItInJar =
-          listOfCucumber.get(i).getVolume() - freeVolumeInJar;
+      while (remainingCucumberVolume > 0.0) {
+        Jar currentJar = jarList.get(jarList.size() - 1);
+        double freeVolumeInJar = currentJar.getFreeVolume();
 
-      while (cucumberRemainderWhenWePutItInJar > 0.0) {
-        jarList.get(jarList.size() - 1).getCucumberList().add(new Cucumber(freeVolumeInJar));
-        jarList.add(new Jar(getStandardJarVolume(), new ArrayList<>()));
+        if (freeVolumeInJar <= 0) {
+          // Текущая банка полная, создаём новую
+          jarList.add(new Jar(getStandardJarVolume(), new ArrayList<>()));
+          continue;
+        }
 
-        freeVolumeInJar = jarList.get(jarList.size() - 1).getFreeVolume();
-        cucumberRemainderWhenWePutItInJar = listOfCucumber.get(i).getVolume() - freeVolumeInJar;
-      }
+        // Определяем, сколько огурца поместится в текущую банку
+        double volumeToPut = Math.min(remainingCucumberVolume, freeVolumeInJar);
+        currentJar.getCucumberList().add(new Cucumber(volumeToPut));
+        
+        remainingCucumberVolume -= volumeToPut;
 
-      if (cucumberRemainderWhenWePutItInJar < 0.0) {
-        jarList.get(jarList.size() - 1).getCucumberList()
-            .add(new Cucumber(listOfCucumber.get(i).getVolume()));
-      } else {
-        if (i != (listOfCucumber.size() - 1)) {
+        // Если огурец ещё остался, но банка заполнилась, создаём новую банку
+        if (remainingCucumberVolume > 0 && currentJar.getFreeVolume() <= 0) {
           jarList.add(new Jar(getStandardJarVolume(), new ArrayList<>()));
         }
       }
-
     }
     return jarList;
   }
